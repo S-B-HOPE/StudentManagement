@@ -3,6 +3,8 @@ package com.example.demo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.UserDto;
@@ -32,6 +34,8 @@ public class UserServiceImpl implements UserService {
 
 		User user = convertDtoToEntity(dto);
 		return userRepository.save(user);
+
+//		return new ResponseEntity<>(user,HttpStatus.CREATED);
 	}
 
 	@Override

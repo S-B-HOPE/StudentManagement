@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,10 +25,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@PostMapping
-	public User createUser(@RequestBody UserDto dto) {
+	@PostMapping("user")
+	ResponseEntity<User> createUser(@RequestBody UserDto dto) {
 
-		return userService.createUser(dto);
+		userService.createUser(dto);
+		return new ResponseEntity("user saved successfully", HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
@@ -37,7 +40,7 @@ public class UserController {
 	}
 
 	@DeleteMapping("/{id}")
-	public String deleleUser(@PathVariable Long id) {
+	public String deleteUser(@PathVariable Long id) {
 		userService.deleteUser(id);
 		return "User deleted";
 	}
